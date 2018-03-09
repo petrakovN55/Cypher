@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact name="cypher:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/cypher_jar</output-path>
+    <root id="root">
+      <element id="archive" name="cypher.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/out/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="cypher" />
+      </element>
+    </root>
+  </artifact>
+</component>
