@@ -5,15 +5,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.math.BigInteger;
 
 import static com.sun.tools.internal.xjc.reader.Ring.add;
 
 public class Main {
     public static String text = "";
+    public static String inputText = "";
     public static void main(String args[]) {
-//        TextEditor t = new TextEditor();
+
+        Crypt c = new Crypt();
+//        c.encryptionLinear(3,5,32,"z","xyz");
+
         Interface();
     }
+//        TextEditor t = new TextEditor();
+//        Interface();
+
 
     private static void Interface() {
         JPanel panel = new JPanel(new GridLayout(2,2));
@@ -33,11 +41,11 @@ public class Main {
         JLabel mLabel = new JLabel("m");
         JLabel y_0Label = new JLabel("y_0");
         JLabel tLabel = new JLabel("t");
-        JTextField aField = setTextField();
-        JTextField bField = setTextField();
-        JTextField mField = setTextField();
-        JTextField y_0Field = setTextField();
-        JTextField tField = setTextField();
+        final JTextField aField = setTextField();
+        final JTextField bField = setTextField();
+        final JTextField mField = setTextField();
+        final JTextField y_0Field = setTextField();
+        final JTextField tField = setTextField();
         lPanel.add(aLabel);
         lPanel.add(bLabel);
         lPanel.add(mLabel);
@@ -59,10 +67,11 @@ public class Main {
         qPanel.add(progressBar);
         qPanel.add(textEditor);
 
-        CheckboxGroup cbg = new CheckboxGroup();
-
-        cPanel.add(new Checkbox("Асинхронное шифрование", cbg, true));
-        cPanel.add(new Checkbox("Синхронное шифрование", cbg, false));
+        final CheckboxGroup cbg = new CheckboxGroup();
+        Checkbox as = new Checkbox("Асинхронное шифрование", cbg, true);
+        final Checkbox sinh = new Checkbox("Синхронное шифрование", cbg, false);
+        cPanel.add(as);
+        cPanel.add(sinh);
         cPanel.add(encrypt);
         cPanel.add(decipher);
         panel.add(openButton);
@@ -98,8 +107,9 @@ public class Main {
                        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                        BufferedReader fin = new BufferedReader(new FileReader(fileopen.getSelectedFile()));
                        String line;
-                       text = "";
-                       while ((line = fin.readLine()) != null) text += line;
+                       inputText = "";
+                       while ((line = fin.readLine()) != null) inputText += line;
+                       System.out.println(inputText);
 
                    }catch(Exception ex) {ex.printStackTrace();}
                 }
@@ -123,6 +133,14 @@ public class Main {
 
 
 
+            }
+        });
+
+        encrypt.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (cbg.getSelectedCheckbox().getLabel() == "Синхронное шифрование") {
+                    text = new Crypt().synhEncryptionLinear(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(mField.getText()), y_0Field.getText(), inputText);
+                }
             }
         });
 

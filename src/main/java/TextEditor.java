@@ -71,8 +71,10 @@ public class TextEditor {
                         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                         BufferedReader fin = new BufferedReader(new FileReader(fileopen.getSelectedFile()));
                         String line;
+                        String tmp = "";
                         text = "";
-                        while ((line = fin.readLine()) != null) textArea.append(line); text += line ;
+                        while ((line = fin.readLine()) != null) tmp += line; text += line ;
+                        textArea.setText(tmp);
 
                     } catch(Exception ex) {ex.printStackTrace();}
                 }
