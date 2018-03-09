@@ -19,6 +19,8 @@ public class Crypt {
         return encryptionText;
     }
 
+
+
     public BigInteger[] stringToByte(String text) {
         String encoding = "UTF-8";
         char [] charArray = text.toCharArray ();

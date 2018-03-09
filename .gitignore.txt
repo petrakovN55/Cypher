@@ -1,7 +1,8 @@
 .idea/
 *.iml
 *.iws
+*.MF
 .DS_Store
 log/
 target/
-META-INF
+META-INF/
